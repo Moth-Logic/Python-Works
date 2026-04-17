@@ -1,26 +1,31 @@
 import math
+
 def esprimo(num):
     """Programa que lee un numero entero o positivo y imprime todos los numeros primos desde 2 hasta N.
-Entradas y Restricciones:
-- Número entero y positivo.
-Salidas:
-- Lista de numeros primos desde 2 hasta N"""
-    if type(num) != int or num<2:
+    Entradas y Restricciones:
+    - Número entero y positivo.
+    Salidas:
+    - Retorna True si num es primo, False en caso contrario"""
+    if type(num) != int or num < 2:
         raise Exception("Número debe ser Integer Positivo mayor a 2")
-    for m in range(2, int(math.sqrt(num))+1):
-        if num%m != 0:
-            return True
-        else:
-            return None
-
+    if num == 2:
+        return True
+    if num % 2 == 0:
+        return False
+    # Check odd divisors only up to sqrt(num)
+    for m in range(3, int(math.sqrt(num)) + 1, 2):
+        if num % m == 0:
+            return False
+    return True
 def main():
     try:
-        Base = 2
-        num= int(input("Escriba un numero entero positivo:  "))
-        for i in range(2, num+1):
-            if esprimo(num) == True:
-                print(f"{i}")
-    except Exception  as e:
+        num = int(input("Escriba un numero entero positivo: "))
+        if num < 2:
+            raise Exception("Número debe ser mayor a 2")
+        print(f"Números primos desde 2 hasta {num}:")
+        for i in range(2, num + 1):
+            if esprimo(i):  # Check each number i, not num
+                print(i)
+    except Exception as e:
         print(f"Error: {e}")
-
 main()
