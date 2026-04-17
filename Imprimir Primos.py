@@ -12,11 +12,12 @@ def esprimo(num):
         return True
     if num % 2 == 0:
         return False
-    # Check odd divisors only up to sqrt(num)
+    # Solo revisar numeros impares
     for m in range(3, int(math.sqrt(num)) + 1, 2):
         if num % m == 0:
             return False
     return True
+
 def main():
     try:
         num = int(input("Escriba un numero entero positivo: "))
@@ -24,7 +25,7 @@ def main():
             raise Exception("Número debe ser mayor a 2")
         print(f"Números primos desde 2 hasta {num}:")
         for i in range(2, num + 1):
-            if esprimo(i):  # Check each number i, not num
+            if esprimo(i):  # Revisar cada i, no "num"
                 print(i)
     except Exception as e:
         print(f"Error: {e}")
